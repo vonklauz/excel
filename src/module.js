@@ -1,7 +1,7 @@
 console.log('module')
 
 async function start() {
-    await Promise.resolve()
+  await Promise.resolve()
 }
 
 start()
