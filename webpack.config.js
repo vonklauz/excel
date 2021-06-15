@@ -10,14 +10,14 @@ const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
 
 const filename = ext => isDev ? `bundle.${ext}` : `bundle.[fullhash].${ext}`
-const jsLoaders = () => {
-  return {
-    loader: 'babel-loader',
-    options: {
-      presets: ['@babel/preset-env']
-    }
-  }
-}
+// const jsLoaders = () => {
+//   return {
+//     loader: 'babel-loader',
+//     options: {
+//       presets: ['@babel/preset-env']
+//     }
+//   }
+// }
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
