@@ -1,7 +1,8 @@
 class Dom {
   constructor(selector) {
     this.$el = typeof selector === 'string' ?
-      document.querySelector(selector) : selector
+      document.querySelector(selector) :
+      selector
   }
 
   html(html) {
@@ -9,7 +10,6 @@ class Dom {
       this.$el.innerHTML = html
       return this
     }
-
     return this.$el.outerHTML.trim()
   }
 
@@ -18,12 +18,12 @@ class Dom {
     return this
   }
 
-  on(eventType, cb) {
-    this.$el.addEventListener(eventType, cb)
+  on(eventType, callback) {
+    this.$el.addEventListener(eventType, callback)
   }
 
-  off(eventType, cb) {
-    this.$el.removeEventListener(eventType, cb)
+  off(eventType, callback) {
+    this.$el.removeEventListener(eventType, callback)
   }
 
   append(node) {
@@ -39,8 +39,31 @@ class Dom {
 
     return this
   }
+
+  get data() {
+    return this.$el.dataset
+  }
+
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach(prop => {
+      this.$el.style[prop] = styles[prop]
+    })
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
 }
 
+// event.target
 export function $(selector) {
   return new Dom(selector)
 }
@@ -50,6 +73,5 @@ $.create = (tagName, classes = '') => {
   if (classes) {
     el.classList.add(classes)
   }
-
   return $(el)
 }
